@@ -4,6 +4,7 @@ import bs4       #to parse through the imported HTML and pull out the links
 import urllib    #to parse urls
 
 start_url = "https://en.wikipedia.org/wiki/Special:Random"
+#do they really all end at Philosopy?
 target_url = "https://en.wikipedia.org/wiki/Philosophy"
 
 def find_first_link(wiki_url):
@@ -15,7 +16,7 @@ def find_first_link(wiki_url):
     # find the first link in the article
     # This div contains the article's body
     content_div = soup.find(id="mw-content-text").find(class_="mw-parser-output")
-    
+
     # stores the first link found in the article, if the article contains no
     # links this will remain None
     article_link = None
