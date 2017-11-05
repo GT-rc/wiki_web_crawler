@@ -8,6 +8,11 @@ start_url = "https://en.wikipedia.org/wiki/Special:Random"
 target_url = "https://en.wikipedia.org/wiki/Philosophy"
 
 def find_first_link(wiki_url):
+    """
+    Pulls the first article from the URL, parses it, and pulls out the first new link for the article chain.
+    
+    Takes wiki_url, a URL from Wikipedia, set above.
+    """
     # get the HTML from "url", use the requests library
     response = requests.get(wiki_url)
     html = response.text
@@ -38,13 +43,21 @@ def find_first_link(wiki_url):
     return first_link
 
 def continue_crawl(search_history, target_url, limit = 25):
+    """
+    Checks to see if the program will continue crawling.
+    
+    Takes search_history, target_url - set above, and a loop limit variable, that has a set default of 25.
+    """
     if search_history[-1] == target_url:
+        # Check to see if you've reached the target URL
         print("You have reached your target URL!")
         return False
     elif len(search_history) > limit:
+        # Check to see if you've reached the loop limit
         print("You have gone through more than 25 pages.")
         return False
     elif search_history[-1] in search_history[:-2]:
+        # Verify you aren't in a repeating loop
         print("You are cycling through the same pages again and again.")
         return False
     else:
